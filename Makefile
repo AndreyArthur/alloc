@@ -22,15 +22,19 @@ test: $(TESTS_BINS)
 
 runtest: $(TESTS_BINS)
 	./$(BIN_DIR)/heap_test
+	./$(BIN_DIR)/memory_test
 
 $(SRC_OBJECTS): $(OBJECTS_DIR) $(SRC_SOURCES)
 	$(CC) $(CFLAGS) -c $(SRC_DIR)/heap.c -o $(OBJECTS_DIR)/heap.o
+	$(CC) $(CFLAGS) -c $(SRC_DIR)/memory.c -o $(OBJECTS_DIR)/memory.o
 
 $(TESTS_OBJECTS): $(OBJECTS_DIR) $(TESTS_SOURCES)
 	$(CC) $(CFLAGS) -c $(TESTS_DIR)/heap_test.c -o $(OBJECTS_DIR)/heap_test.o
+	$(CC) $(CFLAGS) -c $(TESTS_DIR)/memory_test.c -o $(OBJECTS_DIR)/memory_test.o
 
 $(TESTS_BINS): $(BIN_DIR) $(SRC_OBJECTS) $(TESTS_OBJECTS)
 	$(CC) $(CFLAGS) -o $(BIN_DIR)/heap_test  $(OBJECTS_DIR)/heap_test.o $(SRC_OBJECTS)
+	$(CC) $(CFLAGS) -o $(BIN_DIR)/memory_test  $(OBJECTS_DIR)/memory_test.o $(SRC_OBJECTS)
 
 $(OBJECTS_DIR):
 	mkdir -p $@
